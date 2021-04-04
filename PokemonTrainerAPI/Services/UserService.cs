@@ -2,10 +2,7 @@
 using PokemonTrainerAPI.DTO;
 using PokemonTrainerAPI.Repository.Interfaces;
 using PokemonTrainerAPI.Services.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PokemonTrainerAPI.Services
 {
@@ -23,7 +20,7 @@ namespace PokemonTrainerAPI.Services
             Usuario user = new Usuario();
             user.SetEmail(novoUser.email);
             user.SetUsername(novoUser.username);
-            userRepository.AdicionarUser(user);
+            userRepository.InserirUser(user);
         }
 
         public IList<Pokemon> ListarPokemonsDoUser(int id)

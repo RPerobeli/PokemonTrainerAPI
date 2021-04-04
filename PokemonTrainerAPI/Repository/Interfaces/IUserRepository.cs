@@ -8,7 +8,7 @@ namespace PokemonTrainerAPI.Repository.Interfaces
 {
     public interface IUserRepository
     {
-        void AdicionarUser(Usuario user);
+        void InserirUser(Usuario user);
         void Commit();
         IList<Pokemon> ListarPokemons(int idUser);
         void MudarNick(int id, string NovoNick);

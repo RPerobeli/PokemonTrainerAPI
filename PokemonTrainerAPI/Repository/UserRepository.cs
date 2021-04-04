@@ -1,23 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PokemonTrainerAPI.Domain;
 using PokemonTrainerAPI.Repository.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace PokemonTrainerAPI.Repository
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : IUserRepository 
     {
         private PkTrainerContext contexto;
         public UserRepository(PkTrainerContext context)
         {
             contexto  = context;
         }
-        public void AdicionarUser(Usuario user)
+        public void InserirUser(Usuario user)
         {
             contexto.user.Add(user);
+            Commit();
         }
 
         public void Commit()
