@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PokemonTrainerAPI.Domain;
+using PokemonTrainerAPI.Repository.Mapping;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +14,11 @@ namespace PokemonTrainerAPI.Repository
         {
 
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            optionsBuilder.UseSqlServer(connectionString: @"Server=localhost\SQLEXPRESS;Database=PkTrainer;Integrated Security=True");
+            modelBuilder.ApplyConfiguration(new UserMapping());
+            modelBuilder.ApplyConfiguration(new PokemonMapping());
+            base.OnModelCreating(modelBuilder);
         }
         public DbSet<Pokemon> pokemon { get; set; }
         public DbSet<Usuario> user { get; set; }
