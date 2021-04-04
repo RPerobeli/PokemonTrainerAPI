@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "xY9EuRtrLmIce8taAdqy+4O2IuBtAR/RK6jIxgASB2IxgRsmGlrDF4qN31zcGkwxR/llITe1IL5pi+K5WPXIYQ==",
+  "dgSpecHash": "Xum+KP40EfU63wvYE6S1OL9PwQs8E6mqXuAJuzncKo7q/2+MlRNZ0+nvceAa4kzrGiFWrxAmVs2RIoYeviv8vQ==",
   "success": true,
   "projectFilePath": "G:\\Meu Drive\\DESENVOLVEDOR\\PokemonTrainerAPI\\PokemonTrainerAPI\\PokemonTrainerAPI.csproj",
   "expectedPackageFiles": [
@@ -39,6 +39,7 @@
     "C:\\Users\\T-Gamer\\.nuget\\packages\\newtonsoft.json\\10.0.1\\newtonsoft.json.10.0.1.nupkg.sha512",
     "C:\\Users\\T-Gamer\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\T-Gamer\\.nuget\\packages\\swashbuckle.aspnetcore\\6.1.1\\swashbuckle.aspnetcore.6.1.1.nupkg.sha512",
+    "C:\\Users\\T-Gamer\\.nuget\\packages\\swashbuckle.aspnetcore.annotations\\6.1.1\\swashbuckle.aspnetcore.annotations.6.1.1.nupkg.sha512",
     "C:\\Users\\T-Gamer\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.1.1\\swashbuckle.aspnetcore.swagger.6.1.1.nupkg.sha512",
     "C:\\Users\\T-Gamer\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.1.1\\swashbuckle.aspnetcore.swaggergen.6.1.1.nupkg.sha512",
     "C:\\Users\\T-Gamer\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.1.1\\swashbuckle.aspnetcore.swaggerui.6.1.1.nupkg.sha512",

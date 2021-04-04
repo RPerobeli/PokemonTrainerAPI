@@ -26,9 +26,11 @@
       "PokemonTrainerAPI/1.0.0": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "5.0.4",
+          "Microsoft.EntityFrameworkCore.Relational": "5.0.4",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.4",
           "Microsoft.EntityFrameworkCore.Tools": "5.0.4",
           "Swashbuckle.AspNetCore": "6.1.1",
+          "Swashbuckle.AspNetCore.Annotations": "6.1.1",
           "Microsoft.AspNetCore.Antiforgery": "5.0.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "5.0.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "5.0.0.0",
@@ -707,6 +709,20 @@
           "Swashbuckle.AspNetCore.Swagger": "6.1.1",
           "Swashbuckle.AspNetCore.SwaggerGen": "6.1.1",
           "Swashbuckle.AspNetCore.SwaggerUI": "6.1.1"
+        }
+      },
+      "Swashbuckle.AspNetCore.Annotations/6.1.1": {
+        "dependencies": {
+          "Swashbuckle.AspNetCore.SwaggerGen": "6.1.1"
+        },
+        "runtime": {
+          "lib/net5.0/Swashbuckle.AspNetCore.Annotations.dll": {
+            "assemblyVersion": "6.1.1.0",
+            "fileVersion": "6.1.1.0"
+          }
+        },
+        "compile": {
+          "lib/net5.0/Swashbuckle.AspNetCore.Annotations.dll": {}
         }
       },
       "Swashbuckle.AspNetCore.Swagger/6.1.1": {
@@ -3311,6 +3327,13 @@
       "sha512": "sha512-qeGNdISDXqZT2oYWwFWgCiYTnJFxU3qYzZ+xyM/iU/kvI/KWlJGHTxlhLb3giAFxFZM5nRgkHGFb8yfNgr7+kQ==",
       "path": "swashbuckle.aspnetcore/6.1.1",
       "hashPath": "swashbuckle.aspnetcore.6.1.1.nupkg.sha512"
+    },
+    "Swashbuckle.AspNetCore.Annotations/6.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7687LzF/F3dfqBg7AyPtVPDdMr05a/4mfWQFoKsQUeJQugDMHSyepMqrZKG10VGIEZlR38wtQ68z8XudecxjIw==",
+      "path": "swashbuckle.aspnetcore.annotations/6.1.1",
+      "hashPath": "swashbuckle.aspnetcore.annotations.6.1.1.nupkg.sha512"
     },
     "Swashbuckle.AspNetCore.Swagger/6.1.1": {
       "type": "package",
