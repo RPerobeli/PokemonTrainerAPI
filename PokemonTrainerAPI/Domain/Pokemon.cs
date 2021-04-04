@@ -7,11 +7,11 @@ namespace PokemonTrainerAPI.Domain
 {
     public class Pokemon
     {
-        private int id { get; set; }
+        public int id { get; set; }
         public string nome { get; set; }
-        private int idTrainer { get; set; }
+        public int idTrainer { get; set; }
 
-        public string Atributo { get; set; }
+        //public string Atributo { get; set; }
 
         //ToDo, adicionar os ataques vindos da pokeapi
     }
