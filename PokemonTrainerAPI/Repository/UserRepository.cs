@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PokemonTrainerAPI.Domain;
 using PokemonTrainerAPI.Repository.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -67,6 +69,12 @@ namespace PokemonTrainerAPI.Repository
             }).Where(w => w.username == username).ToList();
 
             return userDesejado;
+        }
+
+        public Usuario GetUserByEmail(string email)
+        {
+            Usuario user = contexto.user.FirstOrDefault(u => u.email == email);
+            return user;
         }
     }
 }

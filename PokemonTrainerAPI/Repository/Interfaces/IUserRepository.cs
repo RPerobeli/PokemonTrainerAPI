@@ -15,5 +15,6 @@ namespace PokemonTrainerAPI.Repository.Interfaces
         void MudarNick(int id, string NovoNick);
         void DeleteAll();
         IList<Usuario> FindByUsername(string username);
+        Usuario GetUserByEmail(string email);
     }
 }

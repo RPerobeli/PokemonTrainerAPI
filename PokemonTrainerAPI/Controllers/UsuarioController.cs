@@ -31,7 +31,11 @@ namespace PokemonTrainerAPI.Controllers
             {
                 return BadRequest("Houve um erro ao tentar registrar");
             }
-            userService.AdicionarUsuario(novoUserDto);
+            bool flag = userService.AdicionarUsuario(novoUserDto);
+            if(!flag)
+            {
+                return BadRequest("Email já cadastrado");
+            }
             return Created("", novoUserDto);
         }
         /// <summary>
@@ -39,7 +43,7 @@ namespace PokemonTrainerAPI.Controllers
         /// </summary>
         /// <param></param>
         /// <returns></returns>
-        [SwaggerResponse(statusCode: 200, description: "Sucesso ao Listar", Type = typeof(UserDTO))]
+        [SwaggerResponse(statusCode: 200, description: "Sucesso ao Listar", Type = typeof(IList<UserDTO>))]
         [HttpGet]
         [Route("listarTreinadores")]
         public IActionResult ListarTreinadores()
@@ -53,12 +57,17 @@ namespace PokemonTrainerAPI.Controllers
         /// </summary>
         /// <param></param>
         /// <returns></returns>
-        [SwaggerResponse(statusCode: 200, description: "Sucesso recuperar usuario", Type = typeof(UserDTO))]
+        [SwaggerResponse(statusCode: 200, description: "Sucesso recuperar usuario", Type = typeof(IList<UserDTO>))]
+        [SwaggerResponse(statusCode: 404, description: "usuário não encontrado", Type = typeof(IList<UserDTO>))]
         [HttpGet]
         [Route("{username}")]
         public IActionResult GetUserByUsername(string username)
         {
             IList<UserDTO> userDesejado = userService.GetUserByUsername(username);
+            if (userDesejado.Count == 0)
+            {
+                return NotFound("Treinador inexistente.");
+            }
             return Ok(userDesejado);
         }
 

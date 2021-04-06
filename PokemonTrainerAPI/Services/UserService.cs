@@ -18,12 +18,20 @@ namespace PokemonTrainerAPI.Services
             userRepository = _userRepository;
             mapper = _mapper;
         }
-        public void AdicionarUsuario(UserDTO novoUser)
+        public bool AdicionarUsuario(UserDTO novoUser)
         {
             Usuario user = new Usuario();
-            user.SetEmail(novoUser.email);
-            user.SetUsername(novoUser.username);
-            userRepository.InserirUser(user);
+            if(!VerificarExistenciaEmailNoBanco(novoUser.email))
+            {
+                user.SetEmail(novoUser.email);
+                user.SetUsername(novoUser.username);
+                userRepository.InserirUser(user);
+                return true;
+            }else
+            {
+                return false;
+            }
+            
         }
 
         public IList<UserDTO> GetUserByUsername(string username)
@@ -53,6 +61,18 @@ namespace PokemonTrainerAPI.Services
         public void MudarNick(string novoNick, int id)
         {
             userRepository.MudarNick(id, novoNick);
+        }
+        private bool VerificarExistenciaEmailNoBanco(string email)
+        {
+            Usuario user = userRepository.GetUserByEmail(email);
+            if (user != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
