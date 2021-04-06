@@ -13,5 +13,7 @@ namespace PokemonTrainerAPI.Services.Interfaces
         void MudarNick(string novoNick, int id);
         IList<Pokemon> ListarPokemonsDoUser(int id);
 
+        IList<NovoUserDTO> ListarTreinadores();
+
     }
 }

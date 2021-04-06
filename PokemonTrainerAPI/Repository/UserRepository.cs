@@ -26,7 +26,6 @@ namespace PokemonTrainerAPI.Repository
 
         public IList<Pokemon> ListarPokemons(int idUser)
         {
-
             IList<Pokemon> listaPokemons= contexto.pokemon.Include(i => i.nome).Where(w => w.idTrainer == idUser).ToList();
             return listaPokemons;
         }
@@ -46,6 +45,16 @@ namespace PokemonTrainerAPI.Repository
                 contexto.user.Remove(user);
             }
             Commit();
+        }
+
+        public IList<Usuario> ListarTreinadores()
+        {
+            var lista = contexto.user.Select(s => new Usuario
+            {
+                username = s.username,
+                email = s.email,
+            }).ToList();
+            return lista;
         }
     }
 }

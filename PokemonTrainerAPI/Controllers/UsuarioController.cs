@@ -1,13 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using PokemonTrainerAPI.Domain;
+﻿using Microsoft.AspNetCore.Mvc;
 using PokemonTrainerAPI.DTO;
 using PokemonTrainerAPI.Services.Interfaces;
 using Swashbuckle.AspNetCore.Annotations;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PokemonTrainerAPI.Controllers
 {
@@ -25,7 +20,7 @@ namespace PokemonTrainerAPI.Controllers
         /// <summary>
         /// Registrar um usuário
         /// </summary>
-        /// <param name="NovoUserDTO"></param>
+        /// <param name="novoUserDto"></param>
         /// <returns></returns>
         [SwaggerResponse(statusCode: 201, description: "Sucesso ao Registrar", Type = typeof(NovoUserDTO))]
         [HttpPost]
@@ -38,6 +33,19 @@ namespace PokemonTrainerAPI.Controllers
             }
             userService.AdicionarUsuario(novoUserDto);
             return Created("", novoUserDto);
+        }
+        /// <summary>
+        /// Listar os treinadores cadastrados
+        /// </summary>
+        /// <param></param>
+        /// <returns></returns>
+        [SwaggerResponse(statusCode: 200, description: "Sucesso ao Listar", Type = typeof(NovoUserDTO))]
+        [HttpGet]
+        [Route("listarTreinadores")]
+        public IActionResult ListarTreinadores()
+        {
+            IList<NovoUserDTO> lista = userService.ListarTreinadores();
+            return Ok(lista);
         }
 
     }

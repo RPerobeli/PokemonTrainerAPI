@@ -11,6 +11,7 @@ namespace PokemonTrainerAPI.Repository.Interfaces
         void InserirUser(Usuario user);
         void Commit();
         IList<Pokemon> ListarPokemons(int idUser);
+        IList<Usuario> ListarTreinadores();
         void MudarNick(int id, string NovoNick);
         void DeleteAll();
     }
