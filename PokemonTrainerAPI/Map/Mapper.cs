@@ -10,12 +10,22 @@ namespace PokemonTrainerAPI.Map
 {
     public class Mapper : IMapper
     {
-        public NovoUserDTO Usuario2NovoUserDTO(Usuario user)
+        public UserDTO Usuario2UserDTO(Usuario user)
         {
-            NovoUserDTO userDto = new NovoUserDTO();
+            UserDTO userDto = new UserDTO();
             userDto.username = user.username;
             userDto.email = user.email;
             return userDto;
+        }
+
+        public IList<UserDTO> Usuario2UserDTO(IList<Usuario> users)
+        {
+            IList<UserDTO> usersDto = new List<UserDTO>();
+            foreach(Usuario user in users)
+            {
+                usersDto.Add(Usuario2UserDTO(user));
+            }
+            return usersDto;
         }
     }
 }

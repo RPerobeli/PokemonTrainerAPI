@@ -9,11 +9,11 @@ namespace PokemonTrainerAPI.Services.Interfaces
 {
     public interface IUserService
     {
-        void AdicionarUsuario(NovoUserDTO novoUser);
+        void AdicionarUsuario(UserDTO novoUser);
         void MudarNick(string novoNick, int id);
         IList<Pokemon> ListarPokemonsDoUser(int id);
 
-        IList<NovoUserDTO> ListarTreinadores();
-
+        IList<UserDTO> ListarTreinadores();
+        IList<UserDTO> GetUserByUsername(string username);
     }
 }

@@ -22,10 +22,10 @@ namespace PokemonTrainerAPI.Controllers
         /// </summary>
         /// <param name="novoUserDto"></param>
         /// <returns></returns>
-        [SwaggerResponse(statusCode: 201, description: "Sucesso ao Registrar", Type = typeof(NovoUserDTO))]
+        [SwaggerResponse(statusCode: 201, description: "Sucesso ao Registrar", Type = typeof(UserDTO))]
         [HttpPost]
         [Route("registrar")]
-        public IActionResult Registrar(NovoUserDTO novoUserDto)
+        public IActionResult Registrar(UserDTO novoUserDto)
         {
             if (novoUserDto == null)
             {
@@ -39,13 +39,27 @@ namespace PokemonTrainerAPI.Controllers
         /// </summary>
         /// <param></param>
         /// <returns></returns>
-        [SwaggerResponse(statusCode: 200, description: "Sucesso ao Listar", Type = typeof(NovoUserDTO))]
+        [SwaggerResponse(statusCode: 200, description: "Sucesso ao Listar", Type = typeof(UserDTO))]
         [HttpGet]
         [Route("listarTreinadores")]
         public IActionResult ListarTreinadores()
         {
-            IList<NovoUserDTO> lista = userService.ListarTreinadores();
+            IList<UserDTO> lista = userService.ListarTreinadores();
             return Ok(lista);
+        }
+
+        /// <summary>
+        /// Listar os treinadores cadastrados
+        /// </summary>
+        /// <param></param>
+        /// <returns></returns>
+        [SwaggerResponse(statusCode: 200, description: "Sucesso recuperar usuario", Type = typeof(UserDTO))]
+        [HttpGet]
+        [Route("{username}")]
+        public IActionResult GetUserByUsername(string username)
+        {
+            IList<UserDTO> userDesejado = userService.GetUserByUsername(username);
+            return Ok(userDesejado);
         }
 
     }

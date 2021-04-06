@@ -18,12 +18,19 @@ namespace PokemonTrainerAPI.Services
             userRepository = _userRepository;
             mapper = _mapper;
         }
-        public void AdicionarUsuario(NovoUserDTO novoUser)
+        public void AdicionarUsuario(UserDTO novoUser)
         {
             Usuario user = new Usuario();
             user.SetEmail(novoUser.email);
             user.SetUsername(novoUser.username);
             userRepository.InserirUser(user);
+        }
+
+        public IList<UserDTO> GetUserByUsername(string username)
+        {
+            IList<Usuario> user = userRepository.FindByUsername(username);
+            IList<UserDTO> userDto = mapper.Usuario2UserDTO(user);
+            return userDto;
         }
 
         public IList<Pokemon> ListarPokemonsDoUser(int id)
@@ -32,15 +39,14 @@ namespace PokemonTrainerAPI.Services
             return listaPokemons;
         }
 
-        public IList<NovoUserDTO> ListarTreinadores()
+        public IList<UserDTO> ListarTreinadores()
         {
             IList<Usuario> lista = userRepository.ListarTreinadores();
-            IList<NovoUserDTO> listaSaida = new List<NovoUserDTO>();
-            //ToDo: Map usuario para NovoUserDTO
-            foreach( Usuario user in lista)
-            {
-                listaSaida.Add(mapper.Usuario2NovoUserDTO(user));
-            }
+            IList<UserDTO> listaSaida = mapper.Usuario2UserDTO(lista);
+            //foreach( Usuario user in lista)
+            //{
+            //    listaSaida.Add(mapper.Usuario2UserDTO(user));
+            //}
             return listaSaida;
         }
 

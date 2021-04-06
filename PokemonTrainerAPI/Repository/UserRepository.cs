@@ -51,10 +51,22 @@ namespace PokemonTrainerAPI.Repository
         {
             var lista = contexto.user.Select(s => new Usuario
             {
+                id = s.id,
                 username = s.username,
                 email = s.email,
             }).ToList();
             return lista;
+        }
+        public IList<Usuario> FindByUsername(string username)
+        {
+            IList<Usuario> userDesejado = contexto.user.Select(i => new Usuario
+            {
+                id = i.id,
+                username = i.username,
+                email = i.email
+            }).Where(w => w.username == username).ToList();
+
+            return userDesejado;
         }
     }
 }

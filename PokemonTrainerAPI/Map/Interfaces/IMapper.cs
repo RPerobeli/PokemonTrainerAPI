@@ -9,6 +9,7 @@ namespace PokemonTrainerAPI.Map.Interfaces
 {
     public interface IMapper
     {
-        NovoUserDTO Usuario2NovoUserDTO(Usuario user);
+        UserDTO Usuario2UserDTO(Usuario user);
+        IList<UserDTO> Usuario2UserDTO(IList<Usuario> users);
     }
 }

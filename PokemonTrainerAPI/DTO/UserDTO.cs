@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PokemonTrainerAPI.DTO
 {
-    public class NovoUserDTO
+    public class UserDTO
     {
         [Required(ErrorMessage = "O username é obrigatório")]
         public string username { get; set; }
