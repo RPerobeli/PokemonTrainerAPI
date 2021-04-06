@@ -32,12 +32,21 @@ namespace PokemonTrainerAPI.Repository
             return listaPokemons;
         }
 
-        public void MudarNick(int id, string novoNick)
+        public bool MudarNick(string email, string novoNick)
         {
-            Usuario user = contexto.user.FirstOrDefault(u => u.id == id);
-            user.SetUsername(novoNick);
-            //contexto.Update(user);
-            Commit();
+            Usuario user = contexto.user.FirstOrDefault(u => u.email == email);
+            if(user == null)
+            {
+                return false;
+            }
+            else
+            {
+                user.SetUsername(novoNick);
+                //contexto.Update(user);
+                Commit();
+                return true;
+            }
+            
         }
         public void DeleteAll()
         {

@@ -53,7 +53,7 @@ namespace PokemonTrainerAPI.Controllers
         }
 
         /// <summary>
-        /// Listar os treinadores cadastrados
+        /// Listar os treinadores a partir do username
         /// </summary>
         /// <param></param>
         /// <returns></returns>
@@ -69,6 +69,28 @@ namespace PokemonTrainerAPI.Controllers
                 return NotFound("Treinador inexistente.");
             }
             return Ok(userDesejado);
+        }
+
+        /// <summary>
+        /// Modificar o username de um usuario
+        /// </summary>
+        /// <param name="novoNickDto"></param>
+        /// <returns></returns>
+        [SwaggerResponse(statusCode: 204, description: "Sucesso modificar username", Type = typeof(UserDTO))]
+        [SwaggerResponse(statusCode: 404, description: "email não encontrado", Type = typeof(UserDTO))]
+        [HttpPut]
+        [Route("nickname")]
+        public IActionResult ModificarUsername(UserDTO novoNickDto)
+        {
+            if(novoNickDto == null)
+            {
+                return BadRequest("Houve um erro ao tentar modificar o username.");
+            }
+            if(!userService.MudarNick(novoNickDto.username, novoNickDto.email))
+            {
+                return NotFound("O email procurado não existe no banco");
+            }
+            return Accepted(novoNickDto);
         }
 
     }

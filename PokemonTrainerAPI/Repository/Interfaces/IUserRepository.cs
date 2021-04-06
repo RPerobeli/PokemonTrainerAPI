@@ -12,7 +12,7 @@ namespace PokemonTrainerAPI.Repository.Interfaces
         void Commit();
         IList<Pokemon> ListarPokemons(int idUser);
         IList<Usuario> ListarTreinadores();
-        void MudarNick(int id, string NovoNick);
+        bool MudarNick(string email, string NovoNick);
         void DeleteAll();
         IList<Usuario> FindByUsername(string username);
         Usuario GetUserByEmail(string email);

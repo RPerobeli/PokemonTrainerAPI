@@ -30,10 +30,8 @@ namespace PokemonTrainerAPI.Services
             }else
             {
                 return false;
-            }
-            
+            }  
         }
-
         public IList<UserDTO> GetUserByUsername(string username)
         {
             IList<Usuario> user = userRepository.FindByUsername(username);
@@ -51,16 +49,13 @@ namespace PokemonTrainerAPI.Services
         {
             IList<Usuario> lista = userRepository.ListarTreinadores();
             IList<UserDTO> listaSaida = mapper.Usuario2UserDTO(lista);
-            //foreach( Usuario user in lista)
-            //{
-            //    listaSaida.Add(mapper.Usuario2UserDTO(user));
-            //}
             return listaSaida;
         }
 
-        public void MudarNick(string novoNick, int id)
+        public bool MudarNick(string novoNick, string email)
         {
-            userRepository.MudarNick(id, novoNick);
+            bool flag = userRepository.MudarNick(email, novoNick);
+            return flag;
         }
         private bool VerificarExistenciaEmailNoBanco(string email)
         {
