@@ -11,13 +11,33 @@ namespace PokemonTrainerAPI.Services
     public class UserService : IUserService
     {
         private IUserRepository userRepository;
+        private IPokemonRepository pkRepository;
         private IMapper mapper;
 
-        public UserService(IUserRepository _userRepository, IMapper _mapper)
+        public UserService(IUserRepository _userRepository, IMapper _mapper, IPokemonRepository _pkRepository)
         {
             userRepository = _userRepository;
             mapper = _mapper;
+            pkRepository = _pkRepository;
         }
+
+        public bool AdicionarPokemon(string nome, string email)
+        {
+            if (VerificarExistenciaEmailNoBanco(email))
+            {
+                Pokemon pokemon = new Pokemon();
+                pokemon.nome = nome;
+                Usuario user = userRepository.GetUserByEmail(email);
+                pokemon.idTrainer = user.id;
+                pkRepository.InserirPokemon(pokemon);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public bool AdicionarUsuario(UserDTO novoUser)
         {
             Usuario user = new Usuario();
@@ -38,13 +58,6 @@ namespace PokemonTrainerAPI.Services
             IList<UserDTO> userDto = mapper.Usuario2UserDTO(user);
             return userDto;
         }
-
-        public IList<Pokemon> ListarPokemonsDoUser(int id)
-        {
-            IList<Pokemon> listaPokemons = userRepository.ListarPokemons(id);
-            return listaPokemons;
-        }
-
         public IList<UserDTO> ListarTreinadores()
         {
             IList<Usuario> lista = userRepository.ListarTreinadores();
@@ -57,7 +70,7 @@ namespace PokemonTrainerAPI.Services
             bool flag = userRepository.MudarNick(email, novoNick);
             return flag;
         }
-        private bool VerificarExistenciaEmailNoBanco(string email)
+        public bool VerificarExistenciaEmailNoBanco(string email)
         {
             Usuario user = userRepository.GetUserByEmail(email);
             if (user != null)

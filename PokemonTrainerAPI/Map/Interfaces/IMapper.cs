@@ -11,5 +11,7 @@ namespace PokemonTrainerAPI.Map.Interfaces
     {
         UserDTO Usuario2UserDTO(Usuario user);
         IList<UserDTO> Usuario2UserDTO(IList<Usuario> users);
+        PokemonOutDTO Pokemon2PokemonOutDTO(Pokemon pokemon);
+        IList<PokemonOutDTO> Pokemon2PokemonOutDTO(IList<Pokemon> pokemons);
     }
 }

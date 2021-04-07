@@ -26,12 +26,6 @@ namespace PokemonTrainerAPI.Repository
             contexto.SaveChanges();
         }
 
-        public IList<Pokemon> ListarPokemons(int idUser)
-        {
-            IList<Pokemon> listaPokemons= contexto.pokemon.Include(i => i.nome).Where(w => w.idTrainer == idUser).ToList();
-            return listaPokemons;
-        }
-
         public bool MudarNick(string email, string novoNick)
         {
             Usuario user = contexto.user.FirstOrDefault(u => u.email == email);
