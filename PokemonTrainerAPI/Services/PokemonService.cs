@@ -30,6 +30,7 @@ namespace PokemonTrainerAPI.Services
             {
                 Pokemon pokemon = new Pokemon();
                 pokemon.nome = nome;
+                //ToDo: chama pokeAPI para instanciar restante dos atributos
                 Usuario user = userRepository.GetUserByEmail(email);
                 pokemon.idTrainer = user.id;
                 pkRepository.InserirPokemon(pokemon);

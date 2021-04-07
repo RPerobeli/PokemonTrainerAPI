@@ -52,6 +52,10 @@ namespace PokemonTrainerAPI.Controllers
         public IActionResult ListarTreinadores(string email)
         {
             IList<PokemonOutDTO> lista = pkService.ListarPokemonsDoUser(email);
+            if(lista.Count == 0)
+            {
+                return NotFound("Nenhum pokemon encontrado.");
+            }
             return Ok(lista);
         }
     }
