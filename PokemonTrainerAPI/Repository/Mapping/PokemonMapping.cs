@@ -1,10 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PokemonTrainerAPI.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PokemonTrainerAPI.Repository.Mapping
 {
@@ -16,7 +12,8 @@ namespace PokemonTrainerAPI.Repository.Mapping
             builder.HasKey(p => p.id);
             builder.Property(p => p.id).ValueGeneratedOnAdd();
             builder.Property(p => p.nome);
-            builder.Property(p => p.idTrainer);
+            builder.Property(p => p.idTrainer).IsRequired();
+            builder.HasOne(p => p.trainer).WithMany(u => u.ListaDePokemons).HasForeignKey(p => p.idTrainer).OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

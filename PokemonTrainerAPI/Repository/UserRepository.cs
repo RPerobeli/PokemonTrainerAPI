@@ -21,26 +21,16 @@ namespace PokemonTrainerAPI.Repository
             Commit();
         }
 
-        public void Commit()
+        private void Commit()
         {
             contexto.SaveChanges();
         }
 
-        public bool MudarNick(string email, string novoNick)
+        public void MudarNick(string email, string novoNick)
         {
-            Usuario user = contexto.user.FirstOrDefault(u => u.email == email);
-            if(user == null)
-            {
-                return false;
-            }
-            else
-            {
-                user.SetUsername(novoNick);
-                //contexto.Update(user);
-                Commit();
-                return true;
-            }
-            
+            Usuario user = GetUserByEmail(email);
+            user.SetUsername(novoNick);
+            Commit();            
         }
         public void DeleteAll()
         {
@@ -54,25 +44,30 @@ namespace PokemonTrainerAPI.Repository
 
         public IList<Usuario> ListarTreinadores()
         {
-            //var lista = contexto.user.Select(s => new Usuario
-            //{
-            //    id = s.id,
-            //    username = s.username,
-            //    email = s.email,
-            //}).ToList();
             var lista = contexto.user.ToList();
+            if(lista.Count == 0)
+            {
+                throw new Exception("Não há treinadores cadastrados");
+            }
             return lista;
         }
         public IList<Usuario> FindByUsername(string username)
         {
             IList<Usuario> userDesejado = contexto.user.Where(w => w.username == username).ToList();
-
+            if(userDesejado.Count == 0)
+            {
+                throw new Exception($"Treinador {username} inexistente");
+            }
             return userDesejado;
         }
 
         public Usuario GetUserByEmail(string email)
         {
             Usuario user = contexto.user.FirstOrDefault(u => u.email == email);
+            if (user == null)
+            {
+                throw new Exception($"E-mail {email} não encontrado no banco de treinadores");
+            }
             return user;
         }
     }

@@ -27,12 +27,11 @@ namespace PokemonTrainerAPI.Repository
         }
         public IList<Pokemon> ListarPokemons(Usuario user)
         {
-            IList<Pokemon> listaPokemons = contexto.pokemon.Select(i => new Pokemon
+            IList<Pokemon> listaPokemons = contexto.pokemon.Where(w => w.idTrainer == user.id).ToList();
+            if(listaPokemons.Count == 0)
             {
-                id = i.id,
-                nome = i.nome,
-                idTrainer = i.idTrainer
-            }).Where(w => w.idTrainer == user.id).ToList();
+                throw new Exception($"{user.username} não possui nenhum pokemon");
+            }
             return listaPokemons;
         }
     }
