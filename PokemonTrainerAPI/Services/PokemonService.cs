@@ -24,7 +24,7 @@ namespace PokemonTrainerAPI.Services
             pkRepository = _pkRepository;
             mapper = _mapper;
         }
-        public bool AdicionarPokemon(string nome, string email)
+        public void AdicionarPokemon(string nome, string email)
         {
             if (userService.VerificarExistenciaEmailNoBanco(email))
             {
@@ -34,11 +34,6 @@ namespace PokemonTrainerAPI.Services
                 Usuario user = userRepository.GetUserByEmail(email);
                 pokemon.idTrainer = user.id;
                 pkRepository.InserirPokemon(pokemon);
-                return true;
-            }
-            else
-            {
-                return false;
             }
         }
         public IList<PokemonOutDTO> ListarPokemonsDoUser(string email)

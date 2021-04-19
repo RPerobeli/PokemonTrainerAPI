@@ -9,7 +9,7 @@ namespace PokemonTrainerAPI.Services.Interfaces
 {
     public interface IPokemonService
     {
-        bool AdicionarPokemon(string nome, string email);
+        void AdicionarPokemon(string nome, string email);
         IList<PokemonOutDTO> ListarPokemonsDoUser(string email);
     }
 }

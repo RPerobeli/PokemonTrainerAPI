@@ -1,6 +1,5 @@
 ﻿using PokemonTrainerAPI.Domain;
 using PokemonTrainerAPI.DTO;
-using PokemonTrainerAPI.Map;
 using PokemonTrainerAPI.Map.Interfaces;
 using PokemonTrainerAPI.Repository.Interfaces;
 using PokemonTrainerAPI.Services.Interfaces;
@@ -38,7 +37,7 @@ namespace PokemonTrainerAPI.Services
             }
         }
 
-        public bool AdicionarUsuario(UserDTO novoUser)
+        public void AdicionarUsuario(UserDTO novoUser)
         {
             Usuario user = new Usuario();
             if(!VerificarExistenciaEmailNoBanco(novoUser.email))
@@ -46,11 +45,7 @@ namespace PokemonTrainerAPI.Services
                 user.SetEmail(novoUser.email);
                 user.SetUsername(novoUser.username);
                 userRepository.InserirUser(user);
-                return true;
-            }else
-            {
-                return false;
-            }  
+            }
         }
         public IList<UserDTO> GetUserByUsername(string username)
         {
@@ -65,10 +60,9 @@ namespace PokemonTrainerAPI.Services
             return listaSaida;
         }
 
-        public bool MudarNick(string novoNick, string email)
+        public void MudarNick(string novoNick, string email)
         {
-            bool flag = userRepository.MudarNick(email, novoNick);
-            return flag;
+            userRepository.MudarNick(email, novoNick);
         }
         public bool VerificarExistenciaEmailNoBanco(string email)
         {

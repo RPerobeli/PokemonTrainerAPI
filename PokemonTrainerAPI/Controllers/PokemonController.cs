@@ -31,13 +31,12 @@ namespace PokemonTrainerAPI.Controllers
         [Route("add")]
         public IActionResult AddPokemon(PokemonDTO pokemonDto)
         {
-            if (pokemonDto == null)
+            try
             {
-                return BadRequest("Houve um erro ao tentar adicionar um pokemon.");
-            }
-            if (!pkService.AdicionarPokemon(pokemonDto.nome, pokemonDto.email))
+                pkService.AdicionarPokemon(pokemonDto.nome, pokemonDto.email);
+            }catch(Exception ex)
             {
-                return NotFound("O email procurado não existe no banco");
+                return NotFound(ex.Message);
             }
             return Created("", pokemonDto);
         }
@@ -46,15 +45,19 @@ namespace PokemonTrainerAPI.Controllers
         /// </summary>
         /// <param></param>
         /// <returns></returns>
-        [SwaggerResponse(statusCode: 200, description: "Sucesso ao Listar", Type = typeof(IList<UserDTO>))]
+        [SwaggerResponse(statusCode: 200, description: "Sucesso ao Listar", Type = typeof(IList<PokemonOutDTO>))]
+        [SwaggerResponse(statusCode: 404, description: "Não há pokemons ou não há treinador", Type = typeof(IList<PokemonOutDTO>))]
         [HttpGet]
         [Route("listaPorEmail/{email}")]
-        public IActionResult ListarTreinadores(string email)
+        public IActionResult ListarPokemons(string email)
         {
-            IList<PokemonOutDTO> lista = pkService.ListarPokemonsDoUser(email);
-            if(lista.Count == 0)
+            IList<PokemonOutDTO> lista = new List<PokemonOutDTO>();
+            try
             {
-                return NotFound("Nenhum pokemon encontrado.");
+                lista = pkService.ListarPokemonsDoUser(email);
+            }catch(Exception ex)
+            {
+                return NotFound(ex.Message);
             }
             return Ok(lista);
         }

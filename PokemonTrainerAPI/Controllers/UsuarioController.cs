@@ -2,6 +2,7 @@
 using PokemonTrainerAPI.DTO;
 using PokemonTrainerAPI.Services.Interfaces;
 using Swashbuckle.AspNetCore.Annotations;
+using System;
 using System.Collections.Generic;
 
 namespace PokemonTrainerAPI.Controllers
@@ -27,14 +28,13 @@ namespace PokemonTrainerAPI.Controllers
         [Route("registrar")]
         public IActionResult Registrar(UserDTO novoUserDto)
         {
-            if (novoUserDto == null)
+            try
             {
-                return BadRequest("Houve um erro ao tentar registrar");
+                userService.AdicionarUsuario(novoUserDto);
             }
-            bool flag = userService.AdicionarUsuario(novoUserDto);
-            if(!flag)
+            catch(Exception ex)
             {
-                return BadRequest("Email já cadastrado");
+                return BadRequest(ex.Message);
             }
             return Created("", novoUserDto);
         }
@@ -48,7 +48,14 @@ namespace PokemonTrainerAPI.Controllers
         [Route("listarTreinadores")]
         public IActionResult ListarTreinadores()
         {
-            IList<UserDTO> lista = userService.ListarTreinadores();
+            IList<UserDTO> lista = new List<UserDTO>();
+            try
+            {
+                lista = userService.ListarTreinadores();
+            }catch(Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
             return Ok(lista);
         }
 
@@ -63,11 +70,16 @@ namespace PokemonTrainerAPI.Controllers
         [Route("{username}")]
         public IActionResult GetUserByUsername(string username)
         {
-            IList<UserDTO> userDesejado = userService.GetUserByUsername(username);
-            if (userDesejado.Count == 0)
+            IList<UserDTO> userDesejado = new List<UserDTO>();
+            try
             {
-                return NotFound("Treinador inexistente.");
+                userDesejado = userService.GetUserByUsername(username);
             }
+            catch(Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+            
             return Ok(userDesejado);
         }
 
@@ -82,13 +94,13 @@ namespace PokemonTrainerAPI.Controllers
         [Route("nickname")]
         public IActionResult ModificarUsername(UserDTO novoNickDto)
         {
-            if(novoNickDto == null)
+            try
             {
-                return BadRequest("Houve um erro ao tentar modificar o username.");
+                userService.MudarNick(novoNickDto.username, novoNickDto.email);
             }
-            if(!userService.MudarNick(novoNickDto.username, novoNickDto.email))
+            catch(Exception ex)
             {
-                return NotFound("O email procurado não existe no banco");
+                return NotFound(ex.Message);
             }
             return Accepted(novoNickDto);
         }
