@@ -67,8 +67,8 @@ namespace PokemonTrainerAPI.Controllers
         /// </summary>
         /// <param></param>
         /// <returns></returns>
-        [SwaggerResponse(statusCode: 200, description: "Sucesso ao Listar", Type = typeof(IList<PokemonOutDTO>))]
-        [SwaggerResponse(statusCode: 404, description: "Não há pokemons ou não há treinador", Type = typeof(IList<PokemonOutDTO>))]
+        [SwaggerResponse(statusCode: 200, description: "Sucesso ao Listar", Type = typeof(IList<PokemonOutDetailedDTO>))]
+        [SwaggerResponse(statusCode: 404, description: "Não há pokemons ou não há treinador", Type = typeof(IList<PokemonOutDetailedDTO>))]
         [HttpGet]
         [Route("listaPorEmailDetalhado/{email}")]
         public IActionResult ListarPokemonsDetailsAsync(string email)
@@ -91,8 +91,8 @@ namespace PokemonTrainerAPI.Controllers
         /// </summary>
         /// <param></param>
         /// <returns></returns>
-        [SwaggerResponse(statusCode: 200, description: "Sucesso ao Listar", Type = typeof(IList<PokemonOutDTO>))]
-        [SwaggerResponse(statusCode: 404, description: "Não há pokemons ou não há treinador", Type = typeof(IList<PokemonOutDTO>))]
+        [SwaggerResponse(statusCode: 200, description: "Sucesso ao Listar", Type = typeof(IList<PokemonOutFullDTO>))]
+        [SwaggerResponse(statusCode: 404, description: "Não há pokemons ou não há treinador", Type = typeof(IList<PokemonOutFullDTO>))]
         [HttpGet]
         [Route("{nome}")]
         public IActionResult PokemonsDetailsAsync(string nome)
