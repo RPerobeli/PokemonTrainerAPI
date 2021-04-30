@@ -61,5 +61,53 @@ namespace PokemonTrainerAPI.Controllers
             }
             return Ok(lista);
         }
+
+        /// <summary>
+        /// Listar os pokemons de um usuário cadastrado com mais detalhes (tipos e habilidades passivas).
+        /// </summary>
+        /// <param></param>
+        /// <returns></returns>
+        [SwaggerResponse(statusCode: 200, description: "Sucesso ao Listar", Type = typeof(IList<PokemonOutDTO>))]
+        [SwaggerResponse(statusCode: 404, description: "Não há pokemons ou não há treinador", Type = typeof(IList<PokemonOutDTO>))]
+        [HttpGet]
+        [Route("listaPorEmailDetalhado/{email}")]
+        public IActionResult ListarPokemonsDetailsAsync(string email)
+        {
+            IList<PokemonOutDetailedDTO> lista = new List<PokemonOutDetailedDTO>();
+            try
+            {
+                var task = pkService.ListarPokemonsDoUserDetalhado(email);
+                lista = task.Result;
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+            return Ok(lista);
+        }
+
+        /// <summary>
+        /// Listar TODA a informação de um pokemon.
+        /// </summary>
+        /// <param></param>
+        /// <returns></returns>
+        [SwaggerResponse(statusCode: 200, description: "Sucesso ao Listar", Type = typeof(IList<PokemonOutDTO>))]
+        [SwaggerResponse(statusCode: 404, description: "Não há pokemons ou não há treinador", Type = typeof(IList<PokemonOutDTO>))]
+        [HttpGet]
+        [Route("{nome}")]
+        public IActionResult PokemonsDetailsAsync(string nome)
+        {
+            PokemonOutFullDTO pokemon = new PokemonOutFullDTO();
+            try
+            {
+                Task<PokemonOutFullDTO> task = pkService.PokemonDetalhado(nome);
+                pokemon = task.Result;
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+            return Ok(pokemon);
+        }
     }
 }

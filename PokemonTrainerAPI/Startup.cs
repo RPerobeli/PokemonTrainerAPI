@@ -10,6 +10,7 @@ using PokemonTrainerAPI.Map.Interfaces;
 using PokemonTrainerAPI.Repository;
 using PokemonTrainerAPI.Repository.Interfaces;
 using PokemonTrainerAPI.Services;
+using PokemonTrainerAPI.Services.Client;
 using PokemonTrainerAPI.Services.Interfaces;
 
 namespace PokemonTrainerAPI
@@ -41,6 +42,7 @@ namespace PokemonTrainerAPI
             services.AddScoped<IPokemonRepository, PokemonRepository>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IPokemonService, PokemonService>();
+            //services.AddScoped<IPokemonClient, PokemonClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

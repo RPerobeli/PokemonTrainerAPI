@@ -11,5 +11,7 @@ namespace PokemonTrainerAPI.Services.Interfaces
     {
         void AdicionarPokemon(string nome, string email);
         IList<PokemonOutDTO> ListarPokemonsDoUser(string email);
+        Task<IList<PokemonOutDetailedDTO>> ListarPokemonsDoUserDetalhado(string email);
+        Task<PokemonOutFullDTO> PokemonDetalhado(string nome);
     }
 }
