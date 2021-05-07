@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace PokemonTrainerAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class UsuarioController : ControllerBase
     {

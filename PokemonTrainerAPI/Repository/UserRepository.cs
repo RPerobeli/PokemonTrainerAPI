@@ -64,10 +64,10 @@ namespace PokemonTrainerAPI.Repository
         public Usuario GetUserByEmail(string email)
         {
             Usuario user = contexto.user.FirstOrDefault(u => u.email == email);
-            if (user == null)
-            {
-                throw new Exception($"E-mail {email} não encontrado no banco de treinadores");
-            }
+            //if (user == null)
+            //{
+            //    throw new Exception($"E-mail {email} não encontrado no banco de treinadores");
+            //}
             return user;
         }
     }
