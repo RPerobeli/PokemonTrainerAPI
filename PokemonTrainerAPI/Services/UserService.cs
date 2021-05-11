@@ -3,6 +3,7 @@ using PokemonTrainerAPI.DTO;
 using PokemonTrainerAPI.Map.Interfaces;
 using PokemonTrainerAPI.Repository.Interfaces;
 using PokemonTrainerAPI.Services.Interfaces;
+using System;
 using System.Collections.Generic;
 
 namespace PokemonTrainerAPI.Services
@@ -27,6 +28,7 @@ namespace PokemonTrainerAPI.Services
                 Pokemon pokemon = new Pokemon();
                 pokemon.nome = nome;
                 Usuario user = userRepository.GetUserByEmail(email);
+                isUserValido(user);
                 pokemon.idTrainer = user.id;
                 pkRepository.InserirPokemon(pokemon);
                 return true;
@@ -74,6 +76,14 @@ namespace PokemonTrainerAPI.Services
             else
             {
                 return false;
+            }
+        }
+
+        private void isUserValido(Usuario user)
+        {
+            if (user == null)
+            {
+                throw new Exception($"treinador não encontrado no banco de treinadores");
             }
         }
     }
